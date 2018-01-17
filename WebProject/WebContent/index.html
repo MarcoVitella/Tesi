@@ -24,13 +24,51 @@
 </nav>
   <img src="C:\Users\Marco\Desktop\Uninsubria\terra.jpg" alt="Planet Earth" width="100%" height="auto">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<jsp:useBean id="test" class="searchEngine.DatabaseManager" />
+  <%
+   DatabaseManager tc = new DatabaseManager();
+    String a="basket";
+   tc.findRicerca(a);
+  %>
     <script type="text/javascript">
     function ricerca(){
-      var tag = document.getElementById("searchField").value;
-
-      window.alert(tag);
-      
+      <jsp:useBean id="test" class="searchEngine.DatabaseManager" />
+        <%
+         DatabaseManager tc = new DatabaseManager();
+          String a=getElementById("searchField");
+         var x= tc.findRicerca(a);
+         x.text;
+        %>
+      /*window.alert("coggiuda");
+      var x = getElementById("searchField");
+      x.text = "success";*/
     }
+      /*$("#search").on("submit", function(e){
+        e.preventDefault();
+        if($("#searchField").val().length > 0){
+          var request = $.ajax({
+                    url: "SearchServlet",
+                    type: "POST",
+                    data: {
+                      document.getElementById("searchField").value;
+                    }
+          });
+          window.alert("coggiuda");
+          request.done(function(response) {
+                    if(success){
+                      console.log("bravo");
+                    }
+                    else{
+                      console.log("stronzo");
+                    }
+                    alert(response);
+                });
+                request.fail(function() {
+                  console.log("fail");
+          });
+                
+        }
+           });*/
     </script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

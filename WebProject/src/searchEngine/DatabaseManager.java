@@ -1,7 +1,5 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+package searchEngine;
+
 import java.util.ArrayList;
 
 import com.mongodb.Block;
@@ -55,6 +53,7 @@ public class DatabaseManager {
  
     }*/
     
+	@SuppressWarnings("unchecked")
 	public String findRicerca(String a) {
 		String doc="documento non trovato!";
 		Document result = new Document();

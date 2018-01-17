@@ -17,51 +17,44 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" id="search">
       <input class="form-control mr-sm-2" type="search" id="searchField" autocomplete="on" placeholder="Search Tag" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" id="search" type="submit" onclick="ricerca()">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" id="search" type="submit">Search</button>
     </form>
   </div>
 </nav>
 	<img src="C:\Users\Marco\Desktop\Uninsubria\terra.jpg" alt="Planet Earth" width="100%" height="auto">
+	<div id="ajaxGetUserServletResponse"></div>
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+		<script src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+		<script src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+				
 		<script type="text/javascript">
-		function ricerca(){
-			window.alert("coggiuda");
-			var x = getElementById("searchField");
-			x.text = "success";
-		}
+
 			$("#search").on("submit", function(e){
 				e.preventDefault();
 				if($("#searchField").val().length > 0){
 					var request = $.ajax({
 		                url: "SearchServlet",
-		                type: "POST",
+		                type: "GET",
 		                data: {
-		                	document.getElementById("searchField").value;
+		                	searchField: $("#searchField").val()
 		                }
 					});
-					window.alert("coggiuda");
-					request.done(function(response) {
-		                /*if(success){
-		                	console.log("bravo");
-		                }
-		                else{
-		                	console.log("stronzo");
-		                }*/
-		                alert(response);
+					request.done(function(data, textStatus, jqXHR) {
+						//$('#ajaxGetUserServletResponse').text(responseText);
+						window.alert(data);
 		            });
 		            request.fail(function() {
-		           		console.log("fail");
+		           		window.alert("fail");
 					});
 		            
 				}
 	         });
 		</script>
-	    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+		
 	</body>
 </html>

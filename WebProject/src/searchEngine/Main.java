@@ -1,3 +1,4 @@
+package searchEngine;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 

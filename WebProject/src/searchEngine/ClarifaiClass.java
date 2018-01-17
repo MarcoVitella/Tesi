@@ -1,3 +1,4 @@
+package searchEngine;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,11 @@ import clarifai2.dto.model.output.ClarifaiOutput;
 import clarifai2.dto.model.output_info.ConceptOutputInfo;
 import clarifai2.dto.prediction.Concept;
 import clarifai2.dto.search.SearchInputsResult;
-import okhttp3.OkHttpClient;
+//import okhttp3.OkHttpClient;
 
 public class ClarifaiClass {
 	
+	OkHttpClient bardo = new OkHttpClient();
 	ClarifaiClient client = new ClarifaiBuilder("d25b6723689d4b7998f616789bbede2e")
 		    .buildSync();
 	MongoClient mongoClient = new MongoClient();
