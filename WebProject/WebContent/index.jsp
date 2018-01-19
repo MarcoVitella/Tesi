@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="provaServlet.SearchServlet"%>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>SearchEngine Form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
@@ -24,7 +23,6 @@
   </div>
 </nav>
 	<img src="C:\Users\Marco\Desktop\Uninsubria\terra.jpg" alt="Planet Earth" width="100%" height="auto">
-	<div id="ajaxGetUserServletResponse"></div>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -45,14 +43,27 @@
 		                }
 					});
 					request.done(function(data, textStatus, jqXHR) {
-						//$('#ajaxGetUserServletResponse').text(responseText);
 						window.alert(data);
+						
+						/*var documents = null ;
+						var cList = $('')
+						$.each(countries, function(i)
+						{
+						    var li = $('<li/>')
+						        .addClass('ui-menu-item')
+						        .attr('role', 'menuitem')
+						        .appendTo(cList);
+						    var aaa = $('<a/>')
+						        .addClass('ui-all')
+						        .text(countries[i])
+						        .appendTo(li);
+						});	*/
 		            });
 		            request.fail(function() {
 		           		window.alert("fail");
-					});
-		            
+					});		            
 				}
+			$()	
 	         });
 		</script>
 		

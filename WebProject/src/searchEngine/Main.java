@@ -1,8 +1,7 @@
 package searchEngine;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 
-import com.mongodb.DB;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -10,17 +9,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mongodb.*;
-import com.mongodb.gridfs.*;
-
 import clarifai2.api.ClarifaiBuilder;
 import clarifai2.api.ClarifaiClient;
 import clarifai2.api.ClarifaiResponse;
 import clarifai2.dto.input.ClarifaiInput;
 import clarifai2.dto.model.output.ClarifaiOutput;
 import clarifai2.dto.prediction.Concept;
-
-import com.mongodb.client.model.Filters;
 
 public class Main {
 
@@ -30,7 +24,6 @@ public class Main {
 		MongoClient mongoClient = new MongoClient();
 		MongoDatabase mDB = mongoClient.getDatabase("test");
 		MongoCollection<Document> collection = mDB.getCollection("collection");
-		DatabaseManager database=new DatabaseManager();
 		ArrayList<String> tag = new ArrayList<>();
 		Document docu=new Document();
 

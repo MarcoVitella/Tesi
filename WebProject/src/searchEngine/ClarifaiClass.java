@@ -1,4 +1,5 @@
 package searchEngine;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +15,11 @@ import clarifai2.api.ClarifaiClient;
 import clarifai2.api.ClarifaiResponse;
 import clarifai2.api.request.input.SearchClause;
 import clarifai2.dto.input.ClarifaiInput;
-import clarifai2.dto.input.ClarifaiImage;
-import clarifai2.dto.model.ConceptModel;
 import clarifai2.dto.model.output.ClarifaiOutput;
-import clarifai2.dto.model.output_info.ConceptOutputInfo;
 import clarifai2.dto.prediction.Concept;
-import clarifai2.dto.search.SearchInputsResult;
-//import okhttp3.OkHttpClient;
 
 public class ClarifaiClass {
 	
-	OkHttpClient bardo = new OkHttpClient();
 	ClarifaiClient client = new ClarifaiBuilder("d25b6723689d4b7998f616789bbede2e")
 		    .buildSync();
 	MongoClient mongoClient = new MongoClient();
