@@ -2,8 +2,6 @@ package searchEngine;
 
 import java.util.ArrayList;
 
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -40,18 +38,18 @@ public class DatabaseManager{
 	
 	@SuppressWarnings("unchecked")
 	public String findRicerca(String a) {
+		ArrayList<String> links = new ArrayList<>();
 		collection=mDB.getCollection("collection");
-		String doc="documento non trovato!";
 		Document result = new Document();
-		for(Document document : collection.find(Filters.regex("concepts", a))) {
+		for(Document document : collection.find(Filters.regex("concepts", a, "i"))) {
 			result.append("immagine " + document.getString("id"), (ArrayList<String>)document.get("concepts"));
+			links.add(document.getString("id"));
 		}
 		if(!result.isEmpty()) {
-			System.out.println(result.toString());
-			return result.toString();
+			return convertToJSON(links);
 		}else{ 
 			System.out.println(result.toString());
-			return doc;}
+			return convertToJSON(links);}
 	}
 	public void insertTag(String tag) {
 		collection.insertOne(new Document("_idTag", i).append("nome", tag));
@@ -70,11 +68,9 @@ public class DatabaseManager{
 	      System.out.println("Document deleted successfully...");  
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void convertToJSON(){
-        DBCollection collection = mongoClient.getDB("test").getCollection("collection");
-        DBCursor cursor = collection.find();
-        String serialize = JSON.serialize(cursor);
-        System.out.println(serialize);
+	public String convertToJSON(ArrayList<String> links){
+        String json = JSON.serialize(links);
+        System.out.println(json);
+        return json;
     }
 }

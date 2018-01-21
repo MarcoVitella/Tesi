@@ -30,10 +30,11 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String query = request.getParameter("searchField");
+		System.out.println("request with: " + query);
 	  	//DataFiltering per i controlli
 		String result=analisis.filterSearch(query);
 	    //DatabaseManager per la query
-	  	response.setContentType("text/plain");
+	  	response.setContentType("application/json");
 		response.getWriter().write(result);
 	}
 

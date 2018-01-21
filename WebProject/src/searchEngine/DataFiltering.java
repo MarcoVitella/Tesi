@@ -19,9 +19,22 @@ public class DataFiltering {
 		Matcher matcher = pattern.matcher(userInput);
 	 
 	    if(matcher.matches() & userInput.length()<=50 & userInput.length()>0){
-	        text=db.findRicerca(userInput);
-	    }else{
-	    	text=null;	         
+	        return text=db.findRicerca(userInput);
+	    }
+	    
+	    if(!matcher.matches()){
+	    	ErrorResponse response = new ErrorResponse("error 1");
+	    	return text = response.toJSON();	
+	    }
+	    
+	    if(userInput.length()>50){
+	    	ErrorResponse response = new ErrorResponse("error 2");
+	    	return text = response.toJSON();	
+	    }
+	    
+	    if(userInput.isEmpty()){
+	    	ErrorResponse response = new ErrorResponse("error 3");
+	    	return text = response.toJSON();	
 	    }
 	    return text;
 	}		
