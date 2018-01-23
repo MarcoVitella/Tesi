@@ -11,24 +11,23 @@ import com.mongodb.util.JSON;
 
 import org.bson.Document;
 
-
 public class DatabaseManager{
+	
+	//Selecting a collection
+	private MongoCollection<Document> collection =null;
+	// Accessing the database 
+	private MongoDatabase mDB = null;
+	// Creating a Mongo client
+	private static MongoClient mongoClient = null;
+    private Document tags=new Document();
+	private static int i=0;
 	
 	public DatabaseManager(){
 		mongoClient=getInstance();
 		mDB=mongoClient.getDatabase("test");
 	}
 	
-	//Selecting a collection
-	MongoCollection<Document> collection =null;
-	// Accessing the database 
-	MongoDatabase mDB = null;
-	// Creating a Mongo client
-	private static MongoClient mongoClient = null;
-    
-	Document tags=new Document();
-	static int i=0;
-	
+	//mongoClient singleton: solo un'istanza per volta
 	public static MongoClient getInstance(){
 		if(mongoClient == null) {
 			mongoClient = new MongoClient("localhost", 27017);
@@ -51,6 +50,18 @@ public class DatabaseManager{
 			System.out.println(result.toString());
 			return convertToJSON(links);}
 	}
+	
+	public String convertToJSON(ArrayList<String> links){
+        String json = JSON.serialize(links);
+        System.out.println(json);
+        return json;
+    }
+	
+	public void saveInDB(String url, ArrayList<String> tag){
+		tags.append("concepts", tag).append("id", url);
+		collection.insertOne(tags);
+	}
+	
 	public void insertTag(String tag) {
 		collection.insertOne(new Document("_idTag", i).append("nome", tag));
 		i++;
@@ -68,9 +79,4 @@ public class DatabaseManager{
 	      System.out.println("Document deleted successfully...");  
 	}
 	
-	public String convertToJSON(ArrayList<String> links){
-        String json = JSON.serialize(links);
-        System.out.println(json);
-        return json;
-    }
 }

@@ -31,9 +31,9 @@ public class SearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String query = request.getParameter("searchField");
 		System.out.println("request with: " + query);
-	  	//DataFiltering per i controlli
+	  	//Passaggio del tag a DataFiltering per i controlli
 		String result=analisis.filterSearch(query);
-	    //DatabaseManager per la query
+		//Passaggio dei valori a index.js
 	  	response.setContentType("application/json");
 		response.getWriter().write(result);
 	}

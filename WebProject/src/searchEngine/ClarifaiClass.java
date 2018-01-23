@@ -4,12 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
-
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
 import clarifai2.api.ClarifaiBuilder;
 import clarifai2.api.ClarifaiClient;
 import clarifai2.api.ClarifaiResponse;
@@ -20,36 +14,33 @@ import clarifai2.dto.prediction.Concept;
 
 public class ClarifaiClass {
 	
+	//Collegamento all'API Clarifai
+	private 
 	ClarifaiClient client = new ClarifaiBuilder("d25b6723689d4b7998f616789bbede2e")
 		    .buildSync();
-	MongoClient mongoClient = new MongoClient();
-	MongoDatabase mDB = mongoClient.getDatabase("test");
-	MongoCollection<Document> collection = mDB.getCollection("collection");
-	ArrayList<String> tag = new ArrayList<>();
-	Document docu=new Document();
-
-	String url = "http://www.deifiori.it/Images/BgPage/spiaggia5.jpg";
-	ClarifaiResponse<List<ClarifaiOutput<Concept>>> output = client.getDefaultModels().generalModel().predict()
-	.withInputs(ClarifaiInput.forImage(url))
-	.executeSync();
+	private DatabaseManager database= new DatabaseManager();
 	
-	public void imageRecog(String image){
-		client.getDefaultModels().generalModel().predict()
+	//Assegna i tag all'immagine
+	public ClarifaiResponse<List<ClarifaiOutput<Concept>>> imageRecog(String image){
+		ClarifaiResponse<List<ClarifaiOutput<Concept>>> output=client.getDefaultModels().generalModel().predict()
 		.withInputs(ClarifaiInput.forImage(new File(image)))
 		.executeSync();
+		return output;
 	}
 	
+	//Salva l'url dell'immagine e i tag ad essa associati nel database 
 	public void saveImage(String url) {
-		List<ClarifaiOutput<Concept>> list = output.get();
+		ArrayList<String> tag=new ArrayList<>();
+		List<ClarifaiOutput<Concept>> list = imageRecog(url).get();
 		ClarifaiOutput<Concept> clarifaiOutput = list.get(0);
 		List<Concept> conceptList = clarifaiOutput.data();
 		for(Concept concept : conceptList) {
 			tag.add(concept.name());
 		}
-		docu.append("concepts", tag).append("id", url);
-		collection.insertOne(docu);
+		database.saveInDB(url, tag);
 	}
 	
+	//Indicizza l'immagine, non utilizzato
 	public void addImagetotheIndex(String url) {
 		client.addInputs()
 	    .plus(

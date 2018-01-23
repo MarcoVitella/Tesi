@@ -12,9 +12,9 @@ public class DataFiltering {
 	}
 	
 	public String filterSearch(String text){
-		String userInput = text; //stringa di appoggio per i controlli e la pulizia 
+		String userInput = text;
 		
-		//controlla che la query sia una stringa, che non sia vuota, che non contenga caratteri speciali
+		//controlla che la query sia una stringa, che non sia vuota, che non contenga caratteri speciali,,,
 		Pattern pattern = Pattern.compile("[a-zA-Z0-9]*");
 		Matcher matcher = pattern.matcher(userInput);
 	 
