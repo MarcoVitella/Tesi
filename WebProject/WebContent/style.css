@@ -6,10 +6,6 @@
 	background-color:#00FFFF; 
 }
 
-body{
-	background-image : url("/WebProj/img/night.jpg");
-}
-
 .resultList{
 	height : auto;
 	background-color : white;
